@@ -1,3 +1,4 @@
+import { formatRelativeDate } from "./js/helpers.js";
 import store from "./js/store.js";
 
 const TabType = {
@@ -20,11 +21,14 @@ class App extends React.Component {
       submitted: false,
       selectedTab: TabType.KEYWORD,
       keywordList: [],
+      HistoryList: [],
     };
   }
   componentDidMount() {
     const keywordList = store.getKeywordList();
     this.setState({ keywordList });
+    const HistoryList = store.getHistoryList();
+    this.setState({ HistoryList });
   }
 
   handleReset() {
@@ -44,11 +48,19 @@ class App extends React.Component {
   }
   search(keyword) {
     const searchResult = store.search(keyword);
+    const HistoryList = store.getHistoryList();
     this.setState({
       searchResult,
       keyword,
       submitted: true,
+      HistoryList,
     });
+  }
+  handleClickRemoveHistory(event, keyword) {
+    event.stopPropagation();
+    store.removeHistory(keyword);
+    const HistoryList = store.getHistoryList();
+    this.setState({ HistoryList });
   }
 
   render() {
@@ -102,6 +114,29 @@ class App extends React.Component {
         })}
       </ul>
     );
+    const historyList = (
+      <ul className="list">
+        {this.state.HistoryList.map(({ id, keyword, date }) => {
+          return (
+            <li
+              onClick={() => {
+                this.search(keyword);
+              }}
+              key={id}
+            >
+              {keyword}
+              <span class="date">{formatRelativeDate(date)}</span>
+              <button
+                class="btn-remove"
+                onClick={(event) => {
+                  this.handleClickRemoveHistory(event, keyword);
+                }}
+              ></button>
+            </li>
+          );
+        })}
+      </ul>
+    );
     const tabs = (
       <>
         <ui className="tabs">
@@ -118,7 +153,7 @@ class App extends React.Component {
           })}
         </ui>
         {this.state.selectedTab === "KEYWORD" && keywordList}
-        {this.state.selectedTab === "HISTORY" && <>history</>}
+        {this.state.selectedTab === "HISTORY" && historyList}
       </>
     );
 

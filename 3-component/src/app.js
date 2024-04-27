@@ -1,7 +1,14 @@
 import React from "react";
+import Header from "./components/Header";
+import SearchForm from "./components/SearchForm";
 
 export default class App extends React.Component {
   render() {
-    return <>aaaa</>;
+    return (
+      <>
+        <Header title="검색" />
+        <SearchForm />
+      </>
+    );
   }
 }

@@ -3,6 +3,7 @@ import Header from "./components/Header";
 import SearchForm from "./components/SearchForm";
 import SearchResult from "./components/SearchResult";
 import store from "./Store";
+import Tabs from "./components/Tabs";
 
 const TabType = {
   KEYWORD: "KEYWORD",
@@ -41,7 +42,7 @@ export default class App extends React.Component {
   }
 
   render() {
-    const { searchKeyword, submitted, searchResult } = this.state;
+    const { searchKeyword, submitted, searchResult, selectedTab } = this.state;
     return (
       <>
         <Header title="검색" />
@@ -52,7 +53,14 @@ export default class App extends React.Component {
           onReset={() => this.reset()}
         />
         <div className="container">
-          {submitted && <SearchResult searchResult={searchResult} />}
+          {submitted ? (
+            <SearchResult searchResult={searchResult} />
+          ) : (
+            <Tabs
+              selectedTab={selectedTab}
+              onClick={(tabType) => this.setState({ selectedTab: tabType })}
+            />
+          )}
         </div>
       </>
     );

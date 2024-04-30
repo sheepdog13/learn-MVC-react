@@ -1,22 +1,19 @@
-import React, { Component } from "react";
+import React from "react";
 
-export default class SearchResult extends Component {
-  constructor() {
-    super();
+export default function SearchResult({ searchResult = [] }) {
+  if (searchResult.length === 0)
+    return <div className="empty-box">검색결과가 없습니다.</div>;
 
-    this.state = {
-      searchResult: [],
-    };
-  }
-  render() {
-    return (
-      this.state.searchResult && (
-        <ul>
-          {this.state.searchResult.map((v) => {
-            return;
-          })}
-        </ul>
-      )
-    );
-  }
+  return (
+    <ul className="result">
+      {searchResult.map((item) => {
+        return (
+          <li key={item.id}>
+            <img src={item.imageUrl} alt="사진" />
+            <p>{item.name}</p>
+          </li>
+        );
+      })}
+    </ul>
+  );
 }

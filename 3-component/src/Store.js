@@ -12,7 +12,7 @@ class Store {
     this.storage = storage;
   }
   search(keyword) {
-    // this.addHistory(keyword);
+    this.addHistory(keyword);
 
     return this.storage.productData.filter((product) =>
       product.name.includes(keyword)

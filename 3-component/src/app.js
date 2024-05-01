@@ -3,17 +3,9 @@ import Header from "./components/Header";
 import SearchForm from "./components/SearchForm";
 import SearchResult from "./components/SearchResult";
 import store from "./Store";
-import Tabs from "./components/Tabs";
-
-const TabType = {
-  KEYWORD: "KEYWORD",
-  HISTORY: "HISTORY",
-};
-
-const TabLabel = {
-  [TabType.KEYWORD]: "추천 검색어",
-  [TabType.HISTORY]: "최근 검색어",
-};
+import Tabs, { TabType } from "./components/Tabs";
+import KeywordList from "./components/KeywordList";
+import HistoryList from "./components/HistoryLIst";
 
 export default class App extends React.Component {
   constructor() {
@@ -28,7 +20,11 @@ export default class App extends React.Component {
   }
 
   reset() {
-    console.log("Reset");
+    this.setState({
+      searchKeyword: "",
+      searchResult: [],
+      submitted: false,
+    });
   }
 
   handleChangeInput(searchKeyword) {
@@ -38,7 +34,7 @@ export default class App extends React.Component {
 
   search(searchKeyword) {
     const searchResult = store.search(searchKeyword);
-    this.setState({ searchResult, submitted: true });
+    this.setState({ searchKeyword, searchResult, submitted: true });
   }
 
   render() {
@@ -56,10 +52,18 @@ export default class App extends React.Component {
           {submitted ? (
             <SearchResult searchResult={searchResult} />
           ) : (
-            <Tabs
-              selectedTab={selectedTab}
-              onClick={(tabType) => this.setState({ selectedTab: tabType })}
-            />
+            <>
+              <Tabs
+                selectedTab={selectedTab}
+                onClick={(tabType) => this.setState({ selectedTab: tabType })}
+              />
+              {selectedTab === TabType.KEYWORD && (
+                <KeywordList onClick={(keyword) => this.search(keyword)} />
+              )}
+              {selectedTab === TabType.HISTORY && (
+                <HistoryList onClick={(keyword) => this.search(keyword)} />
+              )}
+            </>
           )}
         </div>
       </>

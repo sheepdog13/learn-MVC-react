@@ -34,5 +34,22 @@ export default class Header {
     header.appendChild(signMenuElem);
 
     this.$app.appendChild(header);
+
+    homeMenuElem.addEventListener("click", () => {
+      window.history.pushState("", "", "/1-vanilla/index.html/web/");
+      const urlChange = new CustomEvent("urlchange", {
+        detail: { href: "/1-vanilla/index.html/web/" },
+      });
+      document.dispatchEvent(urlChange);
+    });
+
+    // SIGNUP 메뉴 클릭 이벤트
+    signMenuElem.addEventListener("click", () => {
+      window.history.pushState("", "", "/1-vanilla/index.html/web/signup");
+      const urlChange = new CustomEvent("urlchange", {
+        detail: { href: "/web/signup" },
+      });
+      document.dispatchEvent(urlChange);
+    });
   }
 }

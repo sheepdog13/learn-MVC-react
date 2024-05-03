@@ -1,6 +1,8 @@
+import CardView from "./components/CardView.js";
 import Header from "./components/Header.js";
 import HomePage from "./pages/HomePage.js";
 import SignupPage from "./pages/SignupPage.js";
+import { setPersonalInfo } from "./storage.js";
 
 export default class App {
   constructor($app) {
@@ -8,7 +10,7 @@ export default class App {
     this.render();
   }
 
-  render() {
+  async render() {
     const header = new Header(this.$app);
     header.render();
 
@@ -21,6 +23,12 @@ export default class App {
     const signupPage = new SignupPage(main);
 
     homePage.render();
+
+    const cardView = new CardView(main);
+
+    cardView.render();
+
+    await setPersonalInfo();
 
     document.addEventListener("urlchange", (e) => {
       let pathname = e.detail.href;

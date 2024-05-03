@@ -2,7 +2,9 @@ export const cardDiv = (index) => {
   const card_div = document.createElement("div");
   card_div.setAttribute("idx", index);
   card_div.setAttribute("class", "card");
-
+  card_div.addEventListener("click", (e) => {
+    card_div.classList.toggle("is-flipped");
+  });
   return card_div;
 };
 

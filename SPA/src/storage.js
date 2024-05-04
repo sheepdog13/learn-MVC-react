@@ -8,3 +8,9 @@ export const setPersonalInfo = async () => {
     localStorage.setItem("personalInfo", arrString);
   }
 };
+
+export const setCardStatus = () => {
+  if (!localStorage.getItem("cardStatus")) {
+    localStorage.setItem("cardStatus", JSON.stringify([]));
+  }
+};

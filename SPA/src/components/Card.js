@@ -1,10 +1,30 @@
 export const cardDiv = (index) => {
   const card_div = document.createElement("div");
   card_div.setAttribute("idx", index);
-  card_div.setAttribute("class", "card");
+  let cardStorage = JSON.parse(localStorage.getItem("cardStatus"));
+  if (!cardStorage[index]) {
+    card_div.setAttribute("class", "card");
+    cardStorage.push({
+      idx: index,
+      status: "card",
+    });
+    localStorage.setItem("cardStatus", JSON.stringify(cardStorage));
+  } else {
+    card_div.setAttribute("class", cardStorage[index].status);
+  }
+
   card_div.addEventListener("click", (e) => {
     card_div.classList.toggle("is-flipped");
+
+    const targetInx = e.target.parentElement.getAttribute("idx");
+    const targetStatus = e.target.parentElement.getAttribute("class");
+
+    let cardStorage = JSON.parse(localStorage.getItem("cardStatus"));
+    cardStorage[targetInx].status = targetStatus;
+
+    localStorage.setItem("cardStatus", JSON.stringify(cardStorage));
   });
+
   return card_div;
 };
 

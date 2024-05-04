@@ -1,3 +1,4 @@
+import { setCardStatus } from "../storage.js";
 import { cardDiv, cardPlane } from "./Card.js";
 
 export default class CardView {
@@ -7,6 +8,8 @@ export default class CardView {
   render() {
     const containerDiv = document.createElement("div");
     containerDiv.setAttribute("id", "cards_container");
+
+    setCardStatus();
 
     const personalInfo = JSON.parse(localStorage.getItem("personalInfo"));
     for (let i = 0; i < personalInfo.length; i++) {

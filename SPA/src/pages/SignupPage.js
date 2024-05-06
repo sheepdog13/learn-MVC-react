@@ -1,4 +1,5 @@
 import ContentTitle from "../components/ContentTitle.js";
+import SignupView from "../components/SignupView.js";
 
 export default class SignupPage {
   constructor($main, $title) {
@@ -10,5 +11,9 @@ export default class SignupPage {
     const title = new ContentTitle(this.$main, "sign up");
 
     title.render();
+
+    const signupView = new SignupView(this.$main);
+
+    signupView.render();
   }
 }

@@ -47,7 +47,7 @@ export default class Header {
     signMenuElem.addEventListener("click", () => {
       window.history.pushState("", "", "/1-vanilla/index.html/web/signup");
       const urlChange = new CustomEvent("urlchange", {
-        detail: { href: "/web/signup" },
+        detail: { href: "/1-vanilla/index.html/web/signup" },
       });
       document.dispatchEvent(urlChange);
     });

@@ -24,10 +24,6 @@ export default class App {
 
     homePage.render();
 
-    const cardView = new CardView(main);
-
-    cardView.render();
-
     await setPersonalInfo();
 
     document.addEventListener("urlchange", (e) => {

@@ -12,8 +12,8 @@ export default class HomePage {
 
     title.render();
 
-    // const cardView = new CardView(this.$main);
+    const cardView = new CardView(this.$main);
 
-    // cardView.render();
+    cardView.render();
   }
 }

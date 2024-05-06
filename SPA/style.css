@@ -109,6 +109,8 @@ header {
   display: block;
   width: 250px;
   margin: 0.75em auto;
+  font-size: 1em;
+  color: #5a5c66;
 }
 
 .form_elem input {
@@ -135,5 +137,10 @@ header {
   border: 0;
   border-radius: 1rem;
   box-sizing: border-box;
-  background: #dedede;
+  background: #29323c;
+  color: white;
+}
+.form_elem button:hover {
+  cursor: pointer;
+  background: #637488;
 }

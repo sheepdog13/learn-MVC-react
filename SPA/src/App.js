@@ -22,7 +22,7 @@ export default class App {
     const homePage = new HomePage(main);
     const signupPage = new SignupPage(main);
 
-    homePage.render();
+    signupPage.render();
 
     await setPersonalInfo();
 

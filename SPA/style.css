@@ -144,3 +144,14 @@ header {
   cursor: pointer;
   background: #637488;
 }
+.form_elem label {
+  display: flex;
+
+  font-size: 0.7em;
+  color: #5a5c66;
+  padding: 3px 5px;
+}
+
+span.mark {
+  color: #ff0000;
+}

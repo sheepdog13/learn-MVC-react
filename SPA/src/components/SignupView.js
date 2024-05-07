@@ -56,12 +56,32 @@ export default class SignupView {
     ];
     select(
       "role",
-      ["", "backend", "frontend", "fullstack"],
+      ["", "백엔드", "프론트엔드", "풀스택"],
       ["직군을 선택해주세요", "백엔드", "프론트엔드", "풀스택"],
       "직군",
       true
     );
     select("mbti", mbtiValList, mbtiTxtList, "mbti");
     button("submit", "등록");
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      let nameVal = e.target.name.value;
+      let emailVal = e.target.email.value;
+      let nicknameVal = e.target.nickname.value;
+      let roleVal = e.target.role.value;
+      let mbtiVal = e.target.mbti.value;
+
+      const submitInfo = {
+        name: nameVal,
+        email: emailVal,
+        nickname: nicknameVal,
+        role: roleVal,
+        mbti: mbtiVal,
+      };
+      const personalInfo = JSON.parse(localStorage.getItem("personalInfo"));
+      personalInfo.push(submitInfo);
+      localStorage.setItem("personalInfo", JSON.stringify(personalInfo));
+    });
   }
 }

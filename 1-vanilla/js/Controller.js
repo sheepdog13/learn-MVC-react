@@ -9,12 +9,13 @@ export default class Controller {
     this.tabView = tabView;
 
     this.subscribeViewEvents();
-    this.tabView.show();
+    this.render();
   }
   subscribeViewEvents() {
     this.searchFormView
       .on("@submit", (e) => this.search(e.detail.value))
       .on("@reset", () => this.reset());
+    this.tabView.on("@change", (e) => this.change(e.detail.value));
   }
   search(keyword) {
     this.store.search(keyword);
@@ -26,13 +27,21 @@ export default class Controller {
     this.store.searchResult = [];
     this.render();
   }
+
+  change(tab) {
+    this.store.selectedTab = tab;
+    this.render();
+  }
+
   render() {
     if (this.store.searchkeyword.length > 0) {
-      this.tabView.hide();
-      this.searchResultView.show(this.store.searchResult);
-      return;
+      return this.renderSearchResult();
     }
     this.searchResultView.hide();
-    this.tabView.show();
+    this.tabView.show(this.store.selectedTab);
+  }
+  renderSearchResult() {
+    this.tabView.hide();
+    this.searchResultView.show(this.store.searchResult);
   }
 }

@@ -22,6 +22,7 @@ export default class Controller {
       .on("@submit", (e) => this.search(e.detail.value))
       .on("@reset", () => this.reset());
     this.tabView.on("@change", (e) => this.change(e.detail.value));
+    this.keywordListView.on("@keyword", (e) => this.search(e.detail.value));
   }
   search(keyword) {
     this.store.search(keyword);
@@ -52,8 +53,9 @@ export default class Controller {
     } else throw "사용할 수 없는 탭입니다";
   }
   renderSearchResult() {
+    this.searchFormView.show(this.store.searchkeyword);
     this.tabView.hide();
-    this.keywordView.hide();
+    this.keywordListView.hide();
     this.searchResultView.show(this.store.searchResult);
   }
 }

@@ -1,12 +1,18 @@
+import { TabType } from "./views/TabView.js";
+
 const tag = "[Controller]";
 
 export default class Controller {
-  constructor(store, { searchFormView, searchResultView, tabView }) {
+  constructor(
+    store,
+    { searchFormView, searchResultView, tabView, keywordListView }
+  ) {
     console.log(tag);
     this.store = store;
     this.searchFormView = searchFormView;
     this.searchResultView = searchResultView;
     this.tabView = tabView;
+    this.keywordListView = keywordListView;
 
     this.subscribeViewEvents();
     this.render();
@@ -39,9 +45,15 @@ export default class Controller {
     }
     this.searchResultView.hide();
     this.tabView.show(this.store.selectedTab);
+    if (this.store.selectedTab === TabType.KEYWORD) {
+      this.keywordListView.show(this.store.getKeywordList());
+    } else if (this.store.selectedTab === TabType.HISTORY) {
+      this.keywordListView.hide();
+    } else throw "사용할 수 없는 탭입니다";
   }
   renderSearchResult() {
     this.tabView.hide();
+    this.keywordView.hide();
     this.searchResultView.show(this.store.searchResult);
   }
 }

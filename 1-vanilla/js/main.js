@@ -4,6 +4,7 @@ import storage from "./storage.js";
 import SearchFormView from "./views/SearchFormView.js";
 import SearchResultView from "./views/SearchResultView.js";
 import TabView from "./views/TabView.js";
+import KeywordListView from "./views/KeywordListView.js";
 
 const tag = "[main]";
 
@@ -16,8 +17,9 @@ function main() {
   const searchFormView = new SearchFormView();
   const searchResultView = new SearchResultView();
   const tabView = new TabView();
+  const keywordListView = new KeywordListView();
 
-  const views = { searchFormView, searchResultView, tabView };
+  const views = { searchFormView, searchResultView, tabView, keywordListView };
 
   new Controller(store, views);
 }

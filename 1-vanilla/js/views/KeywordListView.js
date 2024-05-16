@@ -2,10 +2,10 @@ import { delegate, qs } from "../helpers.js";
 import View from "./View.js";
 
 export default class KeywordListView extends View {
-  constructor() {
-    super(qs("#keyword-list-view"));
+  constructor(element = qs("#keyword-list-view"), templete = new Templete()) {
+    super(element);
 
-    this.templete = new Templete();
+    this.templete = templete;
     this.bindEvents();
   }
   bindEvents() {

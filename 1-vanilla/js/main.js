@@ -5,6 +5,7 @@ import SearchFormView from "./views/SearchFormView.js";
 import SearchResultView from "./views/SearchResultView.js";
 import TabView from "./views/TabView.js";
 import KeywordListView from "./views/KeywordListView.js";
+import HistoryListView from "./views/HistoryListView.js";
 
 const tag = "[main]";
 
@@ -18,8 +19,15 @@ function main() {
   const searchResultView = new SearchResultView();
   const tabView = new TabView();
   const keywordListView = new KeywordListView();
+  const historyListView = new HistoryListView();
 
-  const views = { searchFormView, searchResultView, tabView, keywordListView };
+  const views = {
+    searchFormView,
+    searchResultView,
+    tabView,
+    keywordListView,
+    historyListView,
+  };
 
   new Controller(store, views);
 }
